@@ -6,13 +6,9 @@ import lombok.Data;
 import mx.app.petcare.entity.Role;
 
 @Data
-public class UserCreateDto {
+public class UserDto {
 
 	private long id;
-	private String name;
-	private String lastname;
-	private int age;
-	private String phone;
 	
 	@NotNull(message = "Email could not be null")
 	private String email;

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -21,12 +22,15 @@ public class Pet {
 	private int age;
 	private double growth;
 	private String color;
+	private String gender;
 	private String temperament;
 	private boolean isForAdopting;
 	private boolean isAdopted;
 	
 	@ManyToOne
-	private Owner owner;
+	private Person owner;
 	
+	@OneToOne
+	private Specie specie;
 	
 }

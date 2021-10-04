@@ -21,18 +21,19 @@ public class AdoptionDetails {
 	private long id;
 	
 	@CreatedDate
-	private Date adoptedAt;
+	private Date startedAt;
 	
 	
 	private String status;
+	//Solicitada
 	//En proceso
-	//Terminado
+	//Terminada
 	
 	@ManyToOne
-	private Owner owner;
+	private Person owner;
 	
 	@ManyToOne
-	private Owner adopter;
+	private Person adopter;
 	
 	@ManyToOne
 	private Pet pet;

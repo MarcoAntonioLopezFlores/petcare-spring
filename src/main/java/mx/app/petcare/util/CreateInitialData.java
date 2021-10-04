@@ -5,16 +5,24 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import mx.app.petcare.entity.Person;
 import mx.app.petcare.entity.Role;
+import mx.app.petcare.entity.Specie;
 import mx.app.petcare.entity.UserAccount;
+import mx.app.petcare.repository.PersonRepository;
 import mx.app.petcare.repository.RoleRepository;
+import mx.app.petcare.repository.SpecieRepository;
 import mx.app.petcare.repository.UserRepository;
 
 @Component
 public class CreateInitialData implements CommandLineRunner {
 
 	@Autowired
+	private PersonRepository personRepository;
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private SpecieRepository specieRepository;
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
@@ -23,32 +31,40 @@ public class CreateInitialData implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		if (userRepository.findByEmail("administrador@gmail.com") == null) {
-			Role roleA = new Role();
-			roleA.setName("ROLE_ADMIN");
-			roleA.setDescription("ADMIN");
-			roleRepository.save(roleA);
+		if (userRepository.findByEmail("marco@gmail.com") == null) {
+			Role roleG = new Role();
+			roleG.setName("ROLE_GENERAL");
+			roleG.setDescription("GENERAL");						
+			roleRepository.save(roleG);
 			UserAccount userAccount = new UserAccount();
-			userAccount.setName("Marco");
-			userAccount.setLastname("Lopez");
-			userAccount.setPhone("7772501120");
-			userAccount.setAge(21);
-			userAccount.setEmail("administrador@gmail.com");
-			userAccount.setPassword(passwordEncoder.encode("admin123"));			
-			userAccount.setRole(roleA);
-			userRepository.save(userAccount);			
 			
-					
+			Person person = new Person();
+			person.setName("Marco");
+			person.setLastname("Lopez");
+			person.setPhone("7772501120");
+			person.setAge(21);
+			userAccount.setEmail("marco@gmail.com");
+			userAccount.setPassword(passwordEncoder.encode("marco"));			
+			userAccount.setRole(roleG);
+			person.setUser(userAccount);
+			
+			personRepository.save(person);			
+			
+			
+			if (specieRepository.findByName("PERRO") == null) {
+				Specie specie = new Specie();
+				specie.setName("PERROS");
+				specie.setDescription("Especie canina");
+				specieRepository.save(specie);
+				specieRepository.save(new Specie(2,"GATOS","Especie gatuna"));
+				specieRepository.save(new Specie(3,"AVES","Especie aviaria"));
+			}
 									
 			if (roleRepository.findByName("ROLE_VET") == null) {
 				Role roleV = new Role();
 				roleV.setName("ROLE_VET");
 				roleV.setDescription("VET");						
-				roleRepository.save(roleV);
-				Role roleO = new Role();
-				roleO.setName("ROLE_OWNER");
-				roleO.setDescription("OWNER");						
-				roleRepository.save(roleO);	
+				roleRepository.save(roleV);					
 			}
 			
 		}
