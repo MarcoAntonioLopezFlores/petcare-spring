@@ -28,8 +28,8 @@ public class AddressController {
 	private ModelMapper modelMapper;
 	
 	@GetMapping("/{id}")
-    public ResponseEntity<AddressReadDto> findByUser(@PathVariable long id){        
-		return addressService.findByPerson(id);
+    public ResponseEntity<AddressReadDto> findById(@PathVariable long id){        
+		return addressService.findById(id);
     }
 	
 	@PostMapping("/")

@@ -4,22 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
-public class Address {
+public class ShoppingCart {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long id;
 	
-	private String state;
-	private String city;
-	private String number;
-	private String ville;
-	private String street;
-	private String zip;
-	
+	private double total;
+    private boolean status;
+    
+    @ManyToOne
+    private Person person;
 }

@@ -9,5 +9,5 @@ public class AddressDto {
 	private String town;
 	private String ville;
 	private String street;
-	private PersonDto person;
+	
 }

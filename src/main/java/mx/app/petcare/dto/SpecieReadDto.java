@@ -1,5 +1,11 @@
 package mx.app.petcare.dto;
 
-public class SpecieReadDto {
+import lombok.Data;
 
+@Data
+public class SpecieReadDto {
+	
+	private long id;	
+	private String name;
+	private String description;
 }

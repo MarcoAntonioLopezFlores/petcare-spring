@@ -10,6 +10,6 @@ public class PersonReadDto {
 	private String lastname;
 	private int age;
 	private String phone;
-	
+	private AddressReadDto address;
 	private UserReadDto user;
 }

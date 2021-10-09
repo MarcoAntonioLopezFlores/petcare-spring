@@ -9,17 +9,13 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Address {
-
+public class Category {
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long id;
-	
-	private String state;
-	private String city;
-	private String number;
-	private String ville;
-	private String street;
-	private String zip;
-	
+
+	private String name;
+	private String description;
+	private boolean status = true;
 }

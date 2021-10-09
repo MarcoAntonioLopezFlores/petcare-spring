@@ -5,31 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table( uniqueConstraints = @UniqueConstraint(columnNames = "phone"))
-public class Person {
-
+public class Partner {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long id;
+	
 	private String name;
-	private String lastname;
-	private int age;
+	private String description;
+	@Lob
+	private byte[] file;
 	private String phone;
+	private String type;
+	//MORAL
+	//FISICA
+	private String RFC;
+	private boolean status = false;
 	
 	@OneToOne
 	private Address address;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     private UserAccount user;
-	
-	
-	
+
 }

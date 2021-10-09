@@ -21,7 +21,7 @@ public class AuthController {
 	private AuthService authService;
 	
 	@PostMapping("/signin")
-	public ResponseEntity<JwtResponse> createAuthentication(@RequestBody AuthRequestDto authRequestDto) throws Exception {
+	public ResponseEntity<JwtResponse> createAuthentication(@RequestBody AuthRequestDto authRequestDto){
 		return authService.createTokenAuthentication(authRequestDto);
 	}
 

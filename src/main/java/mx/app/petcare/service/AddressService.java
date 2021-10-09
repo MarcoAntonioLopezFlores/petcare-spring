@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import mx.app.petcare.dto.AddressReadDto;
 import mx.app.petcare.entity.Address;
-import mx.app.petcare.entity.Person;
 import mx.app.petcare.repository.AddressRepository;
 
 @Service
@@ -19,11 +18,9 @@ public class AddressService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	public ResponseEntity<AddressReadDto> findByPerson(long idAddress){
+	public ResponseEntity<AddressReadDto> findById(long idAddress){
 		try {
-			Person person = new Person();
-			person.setId(idAddress);			
-			AddressReadDto addressDto = convertToDto(addressRepository.findByPerson(person));
+			AddressReadDto addressDto = convertToDto(addressRepository.findById(idAddress).get());
 			return new ResponseEntity<AddressReadDto>(addressDto, HttpStatus.ACCEPTED);
 
 		} catch (Exception e) {

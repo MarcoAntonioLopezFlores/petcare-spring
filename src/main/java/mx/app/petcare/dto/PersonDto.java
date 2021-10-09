@@ -10,6 +10,6 @@ public class PersonDto {
 	private String lastname;
 	private int age;
 	private String phone;
-	
+	private AddressDto address;
 	private UserDto user;
 }
