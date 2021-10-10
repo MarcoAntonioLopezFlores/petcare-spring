@@ -1,9 +1,10 @@
 package mx.app.petcare.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,15 @@ public class ReminderService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public ResponseEntity<Page<ReminderReadDto>> findByPerson(long idOwner, Pageable pageable){
+	public ResponseEntity<List<ReminderReadDto>> findByPerson(long idOwner){
 
 		try {
 			Person person = personRepository.getById(idOwner);		
-			Page<ReminderReadDto> remindersDto = reminderRepository.findByOwner(person, pageable).map(reminder -> convertToDto(reminder));
+			List<ReminderReadDto> remindersDto = mapList(reminderRepository.findByOwner(person), ReminderReadDto.class);
 
-			return new ResponseEntity<Page<ReminderReadDto>>(remindersDto, HttpStatus.ACCEPTED);
+			return new ResponseEntity<List<ReminderReadDto>>(remindersDto, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
-			return new ResponseEntity<Page<ReminderReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<ReminderReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
@@ -69,6 +70,13 @@ public class ReminderService {
 
 	private ReminderReadDto convertToDto(Reminder reminder) {
 		return modelMapper.map(reminder, ReminderReadDto.class);
+	}
+
+	private <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
+	    return source
+	      .stream()
+	      .map(element -> modelMapper.map(element, targetClass))
+	      .collect(Collectors.toList());
 	}
 
 }

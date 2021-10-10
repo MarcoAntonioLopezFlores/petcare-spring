@@ -1,9 +1,10 @@
 package mx.app.petcare.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,28 +26,28 @@ public class AdoptionDetailsService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public ResponseEntity<Page<AdoptionDetailsReadDto>> findByAdopter(long idAdopter, Pageable pageable) {
+	public ResponseEntity<List<AdoptionDetailsReadDto>> findByAdopter(long idAdopter) {
 
 		try {
 			Person person = personRepository.getById(idAdopter);
-			Page<AdoptionDetailsReadDto> adoptionsDetailsDto = adoptionDetailsRepository.findByAdopter(person, pageable).map(adoptionDetails -> convertToDto(adoptionDetails));
+			List<AdoptionDetailsReadDto> adoptionsDetailsDto = mapList(adoptionDetailsRepository.findByAdopter(person), AdoptionDetailsReadDto.class);
 
-			return new ResponseEntity<Page<AdoptionDetailsReadDto>>(adoptionsDetailsDto, HttpStatus.ACCEPTED);
+			return new ResponseEntity<List<AdoptionDetailsReadDto>>(adoptionsDetailsDto, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
-			return new ResponseEntity<Page<AdoptionDetailsReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<AdoptionDetailsReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 	
-	public ResponseEntity<Page<AdoptionDetailsReadDto>> findByOwner(long idOwner, Pageable pageable) {
+	public ResponseEntity<List<AdoptionDetailsReadDto>> findByOwner(long idOwner) {
 
 		try {
 			Person person = personRepository.getById(idOwner);
-			Page<AdoptionDetailsReadDto> adoptionsDetailsDto = adoptionDetailsRepository.findByOwner(person, pageable).map(adoptionDetails -> convertToDto(adoptionDetails));
+			List<AdoptionDetailsReadDto> adoptionsDetailsDto = mapList(adoptionDetailsRepository.findByOwner(person), AdoptionDetailsReadDto.class);
 
-			return new ResponseEntity<Page<AdoptionDetailsReadDto>>(adoptionsDetailsDto, HttpStatus.ACCEPTED);
+			return new ResponseEntity<List<AdoptionDetailsReadDto>>(adoptionsDetailsDto, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
-			return new ResponseEntity<Page<AdoptionDetailsReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<AdoptionDetailsReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
@@ -80,6 +81,13 @@ public class AdoptionDetailsService {
 		} catch (Exception e) {
 			return new ResponseEntity<AdoptionDetailsReadDto>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	private <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
+	    return source
+	      .stream()
+	      .map(element -> modelMapper.map(element, targetClass))
+	      .collect(Collectors.toList());
 	}
 
 	private AdoptionDetailsReadDto convertToDto(AdoptionDetails adoptionDetails) {

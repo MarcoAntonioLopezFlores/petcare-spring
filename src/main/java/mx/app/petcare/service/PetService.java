@@ -1,9 +1,10 @@
 package mx.app.petcare.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,15 @@ public class PetService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public ResponseEntity<Page<PetReadDto>> findByPerson(long idOwner, Pageable pageable) {
+	public ResponseEntity<List<PetReadDto>> findByPerson(long idOwner) {
 
 		try {
 			Person person = personRepository.getById(idOwner);
-			Page<PetReadDto> petsDto = petRepository.findByOwner(person, pageable).map(pet -> convertToDto(pet));
+			List<PetReadDto> petsDto = mapList(petRepository.findByOwner(person),PetReadDto.class);
 
-			return new ResponseEntity<Page<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
+			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
-			return new ResponseEntity<Page<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
@@ -66,6 +67,13 @@ public class PetService {
 		} catch (Exception e) {
 			return new ResponseEntity<PetReadDto>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	private <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
+	    return source
+	      .stream()
+	      .map(element -> modelMapper.map(element, targetClass))
+	      .collect(Collectors.toList());
 	}
 
 	private PetReadDto convertToDto(Pet pet) {

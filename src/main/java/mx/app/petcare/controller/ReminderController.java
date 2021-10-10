@@ -1,12 +1,11 @@
 package mx.app.petcare.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +32,8 @@ public class ReminderController {
 	private ModelMapper modelMapper;
 	
 	@GetMapping("/user/{id}")
-    public ResponseEntity<Page<ReminderReadDto>> findByOwner(@PathVariable long id, @PageableDefault(size = 5, page = 0) Pageable paging){	    
-		return reminderService.findByPerson(id, paging);
+    public ResponseEntity<List<ReminderReadDto>> findByOwner(@PathVariable long id){	    
+		return reminderService.findByPerson(id);
     }
 	
 	@GetMapping("/{id}")

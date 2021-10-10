@@ -1,12 +1,11 @@
 package mx.app.petcare.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +32,13 @@ public class AdoptionDetailsController {
 	private ModelMapper modelMapper;
 	
 	@GetMapping("/adopter/{id}")
-    public ResponseEntity<Page<AdoptionDetailsReadDto>> findByOwner(@PathVariable long id, @PageableDefault(size = 5, page = 0) Pageable paging){	    
-		return adoptionDetailsService.findByOwner(id, paging);
+    public ResponseEntity<List<AdoptionDetailsReadDto>> findByOwner(@PathVariable long id){	    
+		return adoptionDetailsService.findByOwner(id);
     }
 	
 	@GetMapping("/owner/{id}")
-    public ResponseEntity<Page<AdoptionDetailsReadDto>> findByAdopter(@PathVariable long id, @PageableDefault(size = 5, page = 0) Pageable paging){	    
-		return adoptionDetailsService.findByAdopter(id, paging);
+    public ResponseEntity<List<AdoptionDetailsReadDto>> findByAdopter(@PathVariable long id){	    
+		return adoptionDetailsService.findByAdopter(id);
     }
 	
 	@GetMapping("/{id}")
