@@ -23,7 +23,7 @@ public class Product {
 	private String name;
 	private String description;
 	@Lob
-	private byte[] imagen;
+	private byte[] image;
 	private double price;
 	
 	@CreatedDate
@@ -31,7 +31,7 @@ public class Product {
 
 	private int quantityStock;
 
-	private boolean status;
+	private boolean status = true;
     
 	@ManyToOne
 	private Partner partner;
@@ -41,4 +41,7 @@ public class Product {
 
     @ManyToOne
     private Category category;
+    
+    @ManyToOne
+    private Specie specie;
 }

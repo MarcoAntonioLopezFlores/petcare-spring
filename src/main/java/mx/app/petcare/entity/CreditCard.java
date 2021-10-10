@@ -17,6 +17,7 @@ public class CreditCard {
 	private long id;
 
 	private String number;
+	private String lastDigits;
 	
 	@ManyToOne
 	private Person person;

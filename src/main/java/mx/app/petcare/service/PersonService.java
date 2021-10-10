@@ -53,7 +53,7 @@ public class PersonService {
 			personFound.setLastname(person.getLastname());
 			personFound.setPhone(person.getPhone());
 			personFound.setAge(person.getAge());
-			System.out.println(personFound);
+			
 			PersonReadDto personDto = convertToDto(personRepository.save(personFound));
 			return new ResponseEntity<PersonReadDto>(personDto, HttpStatus.ACCEPTED);
 
