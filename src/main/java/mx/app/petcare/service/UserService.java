@@ -27,12 +27,12 @@ public class UserService {
 	}
 
 	
-	public boolean updatePass(long idUser, Map<String, Object> informacion) {				
+	public boolean updatePass(long idUser, Map<String, Object> information) {				
 		try {
 			UserAccount userAccount = userRepository.findById(idUser).get();
 		
-			if(passwordEncoder.matches(informacion.get("currentlyPass").toString(),userAccount.getPassword())) {
-				userAccount.setPassword(passwordEncoder.encode(informacion.get("newPass").toString()));
+			if(passwordEncoder.matches(information.get("currentlyPass").toString(),userAccount.getPassword())) {
+				userAccount.setPassword(passwordEncoder.encode(information.get("newPass").toString()));
 				userRepository.save(userAccount);
 				return true;
 			}

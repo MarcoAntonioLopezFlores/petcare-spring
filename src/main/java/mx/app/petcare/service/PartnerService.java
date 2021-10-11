@@ -26,7 +26,7 @@ public class PartnerService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	public ResponseEntity<List<PartnerReadDto>> findAllByStatusIsFalse(Long id){
+	public ResponseEntity<List<PartnerReadDto>> findAllByStatusIsFalse(){
 		try {			
 			List<PartnerReadDto> partnersDto = mapList(partnerRepository.findByStatusIsFalse(), PartnerReadDto.class);
 			return new ResponseEntity<List<PartnerReadDto>>(partnersDto, HttpStatus.ACCEPTED);

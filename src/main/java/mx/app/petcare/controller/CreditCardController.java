@@ -22,7 +22,7 @@ import mx.app.petcare.service.CreditCardService;
 
 
 @RestController
-@RequestMapping("/creditCardcare/card")
+@RequestMapping("/petcare/card")
 public class CreditCardController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class CreditCardController {
 	
 	@PutMapping("/")
     public ResponseEntity<CreditCardReadDto> update(@Valid @RequestBody CreditCardDto creditCardDto){        
-		return creditCardService.save(convertToEntity(creditCardDto));
+		return creditCardService.update(convertToEntity(creditCardDto));
     }
 	
 	

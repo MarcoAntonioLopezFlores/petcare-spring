@@ -22,7 +22,7 @@ import mx.app.petcare.service.AdoptionDetailsService;
 
 
 @RestController
-@RequestMapping("/adoptionDetailscare/adoption")
+@RequestMapping("/petcare/adoption")
 public class AdoptionDetailsController {
 
 	@Autowired

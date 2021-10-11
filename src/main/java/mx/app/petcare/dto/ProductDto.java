@@ -11,7 +11,7 @@ public class ProductDto {
 	private long id;	
 	private String name;
 	private String description;
-	private byte[] image;
+	private String image;
 	private double price;
 	private int quantityStock;
 	private boolean status;  

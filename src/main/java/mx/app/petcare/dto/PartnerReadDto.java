@@ -8,7 +8,7 @@ public class PartnerReadDto {
 	private long id;
 	private String name;
 	private String description;
-	private byte[] file;
+	private String file;
 	private String phone;
 	private String type;
 	private String RFC;

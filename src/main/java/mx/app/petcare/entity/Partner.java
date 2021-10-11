@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
@@ -19,8 +18,9 @@ public class Partner {
 	
 	private String name;
 	private String description;
-	@Lob
-	private byte[] file;
+	private String image;
+	
+	private String file;
 	private String phone;
 	private String type;
 	//MORAL

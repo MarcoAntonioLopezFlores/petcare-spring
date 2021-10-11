@@ -51,6 +51,19 @@ public class ProductService {
 		}
 	}
 	
+	public ResponseEntity<List<ProductReadDto>> findByNameContaining(String name) {
+
+		try {
+			
+			List<ProductReadDto> productsDto = mapList(productRepository.findByNameIgnoreCaseContaining(name),ProductReadDto.class);
+
+			return new ResponseEntity<List<ProductReadDto>>(productsDto, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<List<ProductReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
 	public ResponseEntity<List<ProductReadDto>> findBySpecie(long idSpecie) {
 
 		try {

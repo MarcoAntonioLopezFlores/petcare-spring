@@ -22,6 +22,7 @@ public class Person {
 	private String name;
 	private String lastname;
 	private int age;
+	private String image = null;
 	private String phone;
 	
 	@OneToOne
