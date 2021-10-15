@@ -33,7 +33,7 @@ public class ProductService {
 	
 	public ResponseEntity<List<ProductReadDto>> findTopProducts(){
 		try {			
-			List<ProductReadDto> productsDto = mapList(productRepository.findTop10ByOrderByCreatedAtDescAndStatusIsTrue(), ProductReadDto.class);
+			List<ProductReadDto> productsDto = mapList(productRepository.findByOrderByCreatedAtDesc(), ProductReadDto.class);
 			return new ResponseEntity<List<ProductReadDto>>(productsDto, HttpStatus.ACCEPTED);
 
 		} catch (Exception e) {
