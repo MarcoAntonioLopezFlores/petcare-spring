@@ -18,5 +18,5 @@ public class PetReadDto {
 	private boolean isForAdopting;
 	private boolean isAdopted;
 	private SpecieReadDto specie;
-	private Picture picture;
+	private PictureReadDto picture;
 }
