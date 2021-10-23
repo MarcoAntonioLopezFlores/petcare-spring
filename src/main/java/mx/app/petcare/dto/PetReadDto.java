@@ -1,6 +1,7 @@
 package mx.app.petcare.dto;
 
 import lombok.Data;
+import mx.app.petcare.entity.Picture;
 
 
 @Data
@@ -17,4 +18,5 @@ public class PetReadDto {
 	private boolean isForAdopting;
 	private boolean isAdopted;
 	private SpecieReadDto specie;
+	private Picture picture;
 }
