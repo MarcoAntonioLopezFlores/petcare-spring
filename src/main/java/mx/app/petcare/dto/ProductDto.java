@@ -19,4 +19,5 @@ public class ProductDto {
     private Brand brand;
     private Category category;
     private Specie specie;
+    private PictureProductDto picture;
 }

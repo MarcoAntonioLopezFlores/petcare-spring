@@ -18,4 +18,5 @@ public class PetDto {
 	private boolean isAdopted;
 	private Specie specie;
 	private PersonDto owner;
+	private PictureDto picture;
 }

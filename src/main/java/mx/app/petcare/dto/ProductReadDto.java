@@ -18,4 +18,5 @@ public class ProductReadDto {
     private Brand brand;
     private Category category;
     private Specie specie;
+    private PictureReadDto picture;
 }
