@@ -19,5 +19,9 @@ public class PetDto {
 	private boolean isAdopted;
 	private Specie specie;
 	private PersonDto owner;
+<<<<<<< HEAD
 	private Picture picture;
+=======
+	private PictureDto picture;
+>>>>>>> feature/marco
 }

@@ -35,4 +35,7 @@ public class Pet {
 	@OneToOne
 	private Picture picture;
 	
+	@OneToOne
+	private Picture picture;
+	
 }
