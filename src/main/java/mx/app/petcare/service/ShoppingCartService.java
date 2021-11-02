@@ -87,7 +87,7 @@ public class ShoppingCartService {
                     product.setStatus(false);
                     productRepository.save(product);
                 }
-                shoppingCart.setTotal(shoppingCart.getTotal()+(shoppingCartProduct.getQuantity()*product.getPrice()));
+                shoppingCart.setTotal(shoppingCart.getTotal()+product.getPrice());
                 shoppingCartRepository.save(shoppingCart);
                 
                 ShoppingCartProductReadDto shoppingCartProductDto = convertToDto(shoppingCartProduct);			

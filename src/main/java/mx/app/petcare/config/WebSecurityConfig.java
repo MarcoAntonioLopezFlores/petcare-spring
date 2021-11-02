@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/petcare/auth/signin", "/petcare/person/signup").permitAll()
+                .authorizeRequests().antMatchers("/petcare/auth/signin", "/petcare/person/signup", "/petcare/partner/signup").permitAll()
                 .and()
                 .authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**")
                 .permitAll()

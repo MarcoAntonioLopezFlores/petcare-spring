@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.springframework.data.annotation.CreatedDate;
-
 import lombok.Data;
 @Data
 @Entity
@@ -26,8 +24,7 @@ public class Product {
 	private String image;
 	private double price;
 	
-	@CreatedDate
-	private Date createdAt;
+	private Date createdAt = new Date();
 
 	private int quantityStock;
 

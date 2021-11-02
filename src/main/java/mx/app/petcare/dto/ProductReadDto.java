@@ -3,7 +3,6 @@ package mx.app.petcare.dto;
 import lombok.Data;
 import mx.app.petcare.entity.Brand;
 import mx.app.petcare.entity.Category;
-import mx.app.petcare.entity.Specie;
 
 @Data
 public class ProductReadDto {
@@ -14,9 +13,9 @@ public class ProductReadDto {
 	private String image;
 	private double price;
 	private int quantityStock;  
-	private PartnerDto partner;
+	private PartnerReadDto partner;
     private Brand brand;
     private Category category;
-    private Specie specie;
+    private SpecieReadDto specie;
     private PictureReadDto picture;
 }

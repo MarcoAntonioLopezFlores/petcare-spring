@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.annotation.CreatedDate;
 import lombok.Data;
 
 @Data
@@ -20,8 +19,8 @@ public class ShoppingCart {
 	private long id;
 	private boolean status=true;
 	private double total;
-	@CreatedDate
-	private Date createdAt;
+	
+	private Date createdAt = new Date();
     @ManyToOne
     private Person person;
 }

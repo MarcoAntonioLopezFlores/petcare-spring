@@ -1,7 +1,6 @@
 package mx.app.petcare.dto;
 
 import lombok.Data;
-import mx.app.petcare.entity.Picture;
 
 
 @Data
