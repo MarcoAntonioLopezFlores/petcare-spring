@@ -22,7 +22,7 @@ import mx.app.petcare.service.PictureProductService;
 
 
 @RestController
-@RequestMapping("/productcare/pictureProduct/product")
+@RequestMapping("/petcare/picture/product")
 public class PictureProductController {
 
 	@Autowired
