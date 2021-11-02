@@ -105,12 +105,30 @@ public class ShoppingCartService {
 			Person person = personRepository.getById(idPerson);
 			ShoppingCart shoppingCart= shoppingCartRepository.findByPersonAndStatusIsTrue(person);
             ShoppingCartProduct shoppingCartProduct = shoppingCartProductRepository.findByShoppingCartAndProduct(shoppingCart, product);
-            if(shoppingCartProduct!=null){
+            
+            /*if(shoppingCartProduct!=null){
+            	
                 product.setQuantityStock(product.getQuantityStock()+shoppingCartProduct.getQuantity());
                 shoppingCart.setTotal(shoppingCart.getTotal() - (shoppingCartProduct.getSubtotal()));
                 productRepository.save(product);
                 shoppingCartRepository.save(shoppingCart);
                 shoppingCartProductRepository.delete(shoppingCartProduct);
+                return true;
+            }*/
+            if(shoppingCartProduct!=null){
+            	
+                product.setQuantityStock(product.getQuantityStock()+1);
+                shoppingCart.setTotal(shoppingCart.getTotal() - (shoppingCartProduct.getSubtotal()/shoppingCartProduct.getQuantity()));
+                productRepository.save(product);
+                shoppingCartRepository.save(shoppingCart);
+                if(shoppingCartProduct.getQuantity()==1) {         
+                	shoppingCartProductRepository.delete(shoppingCartProduct);	
+                }else {
+                	shoppingCartProduct.setQuantity(shoppingCartProduct.getQuantity()-1);
+                	shoppingCartProduct.setSubtotal(shoppingCartProduct.getQuantity()*product.getPrice());
+                	shoppingCartProductRepository.save(shoppingCartProduct);
+                }
+                
                 return true;
             }
             return false;
