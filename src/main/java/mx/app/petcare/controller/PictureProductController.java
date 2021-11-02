@@ -36,12 +36,6 @@ public class PictureProductController {
 		return pictureProductService.findByProduct(id);
     }
 	
-	@GetMapping("/{id}")
-    public ResponseEntity<PictureReadDto> findById(@PathVariable long id){
-        
-		return pictureProductService.findOneById(id);
-    }
-	
 	@PostMapping("/")
     public ResponseEntity<PictureReadDto> create(@Valid @RequestBody PictureProductDto pictureProductDto){        
 		return pictureProductService.save(convertToEntity(pictureProductDto));
