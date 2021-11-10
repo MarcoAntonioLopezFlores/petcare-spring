@@ -35,6 +35,26 @@ public class PetController {
 		return petService.findByPerson(id);
     }
 	
+	@GetMapping("/user/{id}/adopted")
+    public ResponseEntity<List<PetReadDto>> findPetsAdoptedByPerson(@PathVariable long id){	    
+		return petService.findPetsAdoptedByPerson(id);
+    }
+	
+	@GetMapping("/user/{id}/adopting")
+    public ResponseEntity<List<PetReadDto>> findPetsForAdoptingByPerson(@PathVariable long id){	    
+		return petService.findPetsForAdoptingByPerson(id);
+    }
+	
+	@GetMapping("/adopting")
+    public ResponseEntity<List<PetReadDto>> findPetsForAdopting(){	    
+		return petService.findPetsForAdopting();
+    }
+	
+	@GetMapping("/adopted")
+    public ResponseEntity<List<PetReadDto>> findPetsForAdopted(){	    
+		return petService.findPetsAdopted();
+    }
+	
 	@GetMapping("/{id}")
     public ResponseEntity<PetReadDto> findById(@PathVariable long id){
         

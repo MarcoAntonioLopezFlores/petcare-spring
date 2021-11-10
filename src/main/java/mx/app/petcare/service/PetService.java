@@ -37,6 +37,59 @@ public class PetService {
 		}
 
 	}
+	
+	public ResponseEntity<List<PetReadDto>> findPetsAdopted() {
+
+		try {
+			
+			List<PetReadDto> petsDto = mapList(petRepository.findByIsAdoptedIsTrue(),PetReadDto.class);
+
+			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<List<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	public ResponseEntity<List<PetReadDto>> findPetsForAdopting() {
+
+		try {
+			
+			List<PetReadDto> petsDto = mapList(petRepository.findByIsForAdoptingIsTrue(),PetReadDto.class);
+
+			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<List<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	public ResponseEntity<List<PetReadDto>> findPetsForAdoptingByPerson(long idOwner) {
+
+		try {
+			Person person = personRepository.getById(idOwner);
+			List<PetReadDto> petsDto = mapList(petRepository.findByOwner(person),PetReadDto.class);
+
+			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<List<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	public ResponseEntity<List<PetReadDto>> findPetsAdoptedByPerson(long idOwner) {
+
+		try {
+			
+			Person person = personRepository.getById(idOwner);
+			List<PetReadDto> petsDto = mapList(petRepository.findByOwnerAndIsAdoptedIsTrue(person),PetReadDto.class);
+
+			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			return new ResponseEntity<List<PetReadDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
 
 	public ResponseEntity<PetReadDto> findOneById(long idPet) {
 		try {

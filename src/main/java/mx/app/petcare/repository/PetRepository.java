@@ -14,4 +14,8 @@ import mx.app.petcare.entity.Pet;
 public interface PetRepository extends JpaRepository<Pet, Long> {
 
 	public List<Pet> findByOwner(Person owner);
+	List<Pet> findByOwnerAndByIsForAdoptingIsTrue(Person owner);
+	List<Pet> findByOwnerAndIsAdoptedIsTrue(Person owner);
+	List<Pet> findByIsForAdoptingIsTrue();
+	List<Pet> findByIsAdoptedIsTrue();
 }
