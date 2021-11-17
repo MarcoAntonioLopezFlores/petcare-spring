@@ -67,7 +67,7 @@ public class PetService {
 
 		try {
 			Person person = personRepository.getById(idOwner);
-			List<PetReadDto> petsDto = mapList(petRepository.findByOwner(person),PetReadDto.class);
+			List<PetReadDto> petsDto = mapList(petRepository.findByOwnerAndIsForAdoptingIsTrue(person),PetReadDto.class);
 
 			return new ResponseEntity<List<PetReadDto>>(petsDto, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
