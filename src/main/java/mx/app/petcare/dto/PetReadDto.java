@@ -1,6 +1,7 @@
 package mx.app.petcare.dto;
 
 import lombok.Data;
+import mx.app.petcare.entity.Person;
 
 
 @Data
@@ -18,4 +19,5 @@ public class PetReadDto {
 	private boolean isAdopted;
 	private SpecieReadDto specie;
 	private PictureReadDto picture;
+	private PersonReadDto owner;
 }
